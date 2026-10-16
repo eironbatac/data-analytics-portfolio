@@ -1,10 +1,8 @@
-
--- Check Date Availability Across the Dataset
-
 SELECT
-    COUNT(*) AS total_records,
-    SUM(order_date IS NULL) AS missing_order_dates,
-    SUM(ship_date IS NULL) AS missing_ship_dates,
-    SUM(order_date IS NULL AND ship_date IS NULL)
-        AS both_dates_missing
-FROM retail_sales_analysis.orders;
+    row_id,
+    order_id,
+    order_date,
+    ship_date,
+    ship_mode
+FROM retail_sales_analysis.orders
+WHERE row_id IN (22, 24, 31);
