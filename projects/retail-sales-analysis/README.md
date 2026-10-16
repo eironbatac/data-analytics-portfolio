@@ -145,6 +145,28 @@ Evaluated customer-level sales, profit, order counts, and profit margins to iden
 
 Identify the products, discounts, and transactions associated with customers generating substantial losses. Use these findings to investigate opportunities to improve transaction profitability while maintaining customer relationships. Customer-level losses should be investigated before making decisions about individual customers.
 
+### 10. Monthly Sales and Profit Trends
+
+Analyzed monthly sales, total profit, and profit margins using the corrected order dates in the staging table.
+
+**Key Findings**
+
+- Monthly sales and profitability varied across the analyzed period.
+- November 2026 recorded the highest monthly sales in the dataset at $118,454.51.
+- December 2025 recorded the highest monthly profit at $17,926.30.
+- October 2025 achieved the highest monthly profit margin at 27.17%.
+- January 2024 recorded a negative profit of $3,189.80 and a profit margin of -17.28%.
+
+**Data Quality Note**
+
+The dataset contains records dated after October 17, 2026, including records for November and December 2026. These figures are retained in the analysis but should be treated as future-dated source records until their validity and intended date range are verified. The monthly results may therefore require further validation before being interpreted as completed historical performance.
+
+**Business Implication**
+
+Monitoring sales, profit, and profit margins together provides a more complete view of business performance than sales alone. Further investigation of unusually profitable or loss-making months can help identify patterns in product mix, discounting, and transaction profitability.
+
+
+
 
 
 ## Next Steps
