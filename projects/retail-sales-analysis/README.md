@@ -129,6 +129,21 @@ Analyzed profitability across Consumer, Corporate, and Home Office segments at d
 
 Review discount policies across customer segments, particularly for discounts of 30% or higher. Before changing pricing strategies, investigate product mix, order size, and transaction volume to understand the factors associated with lower profitability. These findings indicate an association rather than proof of causation.
 
+### 9. Customer-Level Profitability Analysis
+
+Evaluated customer-level sales, profit, order counts, and profit margins to identify high-performing customers and customers associated with losses.
+
+**Key Findings**
+
+- Analyzed 804 customer records.
+- 645 customers generated positive total profit, while 159 had negative total profit.
+- Tamara Chand was the most profitable customer, generating $8,981.32 in total profit across 5 distinct orders.
+- Cindy Stewart recorded the largest customer-level loss, totaling $6,626.39 across 6 distinct orders.
+- The customer-level results represented $2,326,534.52 in sales and $292,296.97 in profit.
+
+**Business Implication**
+
+Identify the products, discounts, and transactions associated with customers generating substantial losses. Use these findings to investigate opportunities to improve transaction profitability while maintaining customer relationships. Customer-level losses should be investigated before making decisions about individual customers.
 
 
 
