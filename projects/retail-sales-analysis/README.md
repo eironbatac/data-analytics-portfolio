@@ -2,177 +2,242 @@
 
 ## Project Overview
 
-This project analyzes retail sales data using SQL to evaluate sales performance, profitability, and product category performance. The goal is to identify meaningful business insights that can support data-driven decision-making.
+This project analyzes the Sample Superstore retail dataset using MySQL, SQL, Python, and Tableau Public to evaluate sales performance, profitability, customer segments, product categories, and regional trends.
 
-## Objectives
+The objective is to transform raw retail transaction data into actionable business insights through structured SQL analysis and interactive data visualizations.
 
-- Analyze overall sales and profit performance.
-- Compare sales and profitability across product categories.
-- Identify categories with strong sales and low profit margins.
-- Explore sales trends and opportunities for improvement.
+## Business Objectives
+
+- Evaluate overall sales and profit performance.
+- Compare sales and profitability across product categories and sub-categories.
+- Identify geographic markets with high sales performance.
+- Analyze shipping methods and their relationship with profitability.
+- Investigate discount levels associated with lower profits and losses.
+- Compare customer segment performance and customer-level profitability.
+- Visualize monthly sales trends and identify unusual performance patterns.
+- Develop evidence-based recommendations for further business investigation.
 
 ## Tools and Technologies
 
-- **MySQL** — Data querying and analysis
-- **Visual Studio Code** — SQL development environment
-- **SQLTools** — Database connection and query execution
-- **Tableau** — Data visualization and dashboard development (planned)
+- **MySQL** — Data storage, querying, aggregation, and analysis.
+- **Visual Studio Code** — SQL development environment.
+- **SQLTools** — Database connection and query execution.
+- **Python** — CSV structure validation and preparation for visualization.
+- **Tableau Public** — Data visualization and dashboard development.
+- **Git and GitHub** — Version control and project documentation.
 
 ## Dataset
 
-The project uses the Sample Superstore retail dataset, containing order details, customer information, product categories, sales, discounts, quantities, and profits.
+The project uses the Sample Superstore dataset obtained from Tableau's sample data resources.
 
-The dataset contains **10,194 records** in the imported MySQL table.
+The dataset contains order dates, shipping information, customer details, geographic fields, product categories, sales, discounts, quantities, and profits.
 
-## Analysis Progress
+### Dataset Summary
+
+| Metric | Value |
+|---|---:|
+| Total records | 10,194 |
+| Total sales | $2,326,534.35 |
+| Total profit | $292,296.81 |
+| Distinct customers | 804 |
+| First order date | January 3, 2023 |
+| Last order date | December 30, 2026 |
+
+The totals above were validated against the imported MySQL staging table.
+
+**Data limitation:** The source dataset contains records dated after October 19, 2026, including dates in November and December 2026. These records were present in the source data and were retained during analysis. Their validity and intended reporting period have not been independently verified, so the latest months should not automatically be interpreted as completed historical performance.
+
+## Data Preparation and Validation
+
+The data preparation and validation process included:
+
+- Checking the CSV structure and column count.
+- Validating the imported record count.
+- Parsing order and shipping dates into appropriate date fields in MySQL.
+- Comparing aggregate sales and profit figures against the imported data.
+- Investigating discrepancies between raw aggregate totals and totals calculated from individually rounded customer-level results.
+- Checking the dataset's date range and identifying future-dated records.
+
+The validated overall sales and profit figures are based on the raw numeric values before rounding the final aggregate results to two decimal places.
+
+## SQL Analysis and Key Findings
 
 ### 1. Sales Overview
 
-Analyzed total records, total sales, total profit, average sales per record, and average profit per record.
+Evaluated the total number of records, total sales, total profit, average sales per record, and average profit per record.
 
-### 2. Category Performance
+**Validated results:**
+- Total sales: **$2,326,534.35**
+- Total profit: **$292,296.81**
+- Records analyzed: **10,194**
 
-Compared total records, sales, profit, and profit margin across product categories.
+### 2. Product Category Performance
 
-**Preliminary Findings**
+Compared sales, profit, record counts, and profit margins across Furniture, Office Supplies, and Technology.
 
-- Technology generated the highest sales and total profit among the three categories.
+**Key findings:**
+- Technology generated the highest category sales at **$839,893.28**.
+- Furniture generated **$754,747.76** in sales.
+- Office Supplies generated **$731,893.31** in sales.
+- Technology generated the highest total profit among the three categories.
 - Furniture had a substantially lower profit margin than Technology and Office Supplies.
-- Office Supplies accounted for the largest number of records.
+
+**Business implication:** Evaluate product mix, pricing, discounting, and costs to understand why category sales and profitability differ.
 
 ### 3. Regional Performance
 
-Compared total records, sales, profit, and profit margin across the four regions.
+Compared sales, profit, record counts, and profit margins across the East, West, Central, and South regions.
 
-**Key Findings**
+**Key findings:**
+- West recorded the highest sales at **$739,813.61** and the highest profit at **$110,798.82**.
+- West also recorded the highest regional profit margin at **14.98%**.
+- East ranked second in sales at **$691,828.17**.
+- Central had the lowest regional profit margin at **7.92%**.
+- South recorded the lowest regional sales at **$391,721.91**, while maintaining a higher margin than Central.
 
-- The West region generated the highest sales ($739,813.61) and profit ($110,798.82).
-- The West also recorded the highest profit margin at 14.98%.
-- The Central region had the lowest profit margin at 7.92%, indicating a need to investigate its product mix, discounting, and costs.
-- The South generated the lowest sales ($391,721.91), while maintaining a higher profit margin than Central.
+**Business implication:** Investigate the factors associated with Central's lower margin and compare product mix, discounts, and costs across regions.
 
-### 4. Product Sub-Category Performance
+### 4. Geographic Sales Analysis
 
-Analyzed total records, sales, profit, and profit margin across 17 product sub-categories.
+Developed a Tableau filled map to compare sales across geographic areas using state and province information.
 
-**Key Findings**
+**Key findings:**
+- California recorded the highest state-level sales in the visualization at **$457,687.63**.
+- Geographic shading highlights differences in sales across mapped locations.
+- The color legend represents total sales, with darker blue indicating higher sales values.
 
-- Chairs generated the highest sales at $335,768.25.
-- Copiers generated the highest total profit at $56,093.94 and a profit margin of 37.21%.
-- Tables recorded the largest loss at $17,753.21, with a negative profit margin of -8.53%.
-- Bookcases and Supplies also recorded negative profits.
-- The results show that high sales do not always translate into high profitability.
+**Business implication:** Use the geographic view to identify major sales markets and areas that may warrant additional investigation. Geographic comparisons should be interpreted in the context of the dataset's coverage and the sales values associated with each location.
 
-**Business Implication**
+### 5. Product Sub-Category Performance
 
-Investigate discounting, product costs, and other relevant expenses for loss-making sub-categories, particularly Tables. Further analysis is needed before recommending specific changes.
+Compared sales, profit, record counts, and profit margins across 17 product sub-categories.
 
-### 5. Shipping Method Performance
+**Key findings:**
+- Chairs generated the highest sub-category sales at **$335,768.25**.
+- Copiers generated the highest total profit at **$56,093.94**, with a profit margin of **37.21%**.
+- Tables recorded the largest loss at **$17,753.21**, with a negative profit margin of **-8.53%**.
+- Bookcases and Supplies also recorded negative total profits.
+- High sales do not necessarily translate into high profitability.
 
-Compared total records, sales, profit, and profit margin across four shipping methods.
+**Business implication:** Investigate discounting, product costs, and transaction characteristics associated with loss-making sub-categories, particularly Tables.
 
-**Key Findings**
+### 6. Shipping Method Performance
 
-- Standard Class generated the highest sales ($1,378,840.55) and total profit ($168,161.21).
-- First Class recorded the highest profit margin at 13.93%.
-- Same Day had the lowest sales ($129,271.96) and total profit ($16,160.75).
+Compared record counts, sales, profit, and profit margins across four shipping methods.
+
+**Key findings:**
+- Standard Class generated the highest sales at **$1,378,840.55** and the highest profit at **$168,161.21**.
+- First Class recorded the highest profit margin at **13.93%**.
+- Same Day recorded the lowest sales at **$129,271.96** and total profit at **$16,160.75**.
 - Standard Class accounted for the largest number of records, while Same Day accounted for the fewest.
 
-**Business Implication**
+**Business implication:** Compare shipping costs, order characteristics, and customer requirements to better understand differences in shipping-method profitability.
 
-Compare shipping costs, order characteristics, and customer requirements to understand how each shipping method affects profitability. The current results show associations, not proof that a shipping method causes a particular profit outcome.
+### 7. Discount and Profitability Analysis
 
-### 6. Discount and Profitability Analysis
+Evaluated sales, total profit, average profit per record, and profit margins across discount levels.
 
-Compared sales, total profit, average profit per record, and profit margin across discount levels.
-
-**Key Findings**
-
-- Orders with no discount generated the highest total profit at $326,718.59 and a profit margin of 29.56%.
-- The 10% and 20% discount groups remained profitable in the results.
+**Key findings:**
+- Transactions with no discount generated **$326,718.59** in total profit and a profit margin of **29.56%**.
+- The 10% and 20% discount groups remained profitable in the analysis.
 - Discount levels of 30% and above showed negative total profit.
-- The 70% discount group recorded a profit margin of -98.76%, with a total loss of $40,300.57.
-- The 80% discount group had the lowest profit margin at -180.01%, with a total loss of $30,565.27.
+- The 70% discount group recorded a total loss of **$40,300.57** and a profit margin of **-98.76%**.
+- The 80% discount group recorded a total loss of **$30,565.27** and a profit margin of **-180.01%**.
 
-**Business Implication**
+**Business implication:** Review high-discount transactions and investigate their product mix, costs, and order characteristics before recommending pricing changes. These results indicate associations, not proof that discounts alone caused the losses.
 
-Review high-discount transactions to understand their relationship with profitability. Consider product costs, product mix, and discount policies before recommending changes. These results show an association between discount levels and profitability, but they do not, by themselves, prove that discounts caused the losses.
+### 8. Customer Segment Analysis
 
-### 7. Customer Segment Analysis
+Compared sales, profit, order counts, and profit margins across Consumer, Corporate, and Home Office segments.
 
-Compared sales, total profit, order counts, and profit margins across the Consumer, Corporate, and Home Office customer segments.
+**Key findings:**
+- Consumer generated the highest sales at **$1,170,659.79** and the highest profit at **$136,371.45**.
+- Corporate generated **$715,806.13** in sales and **$94,249.64** in profit.
+- Home Office generated **$440,068.43** in sales and **$61,675.73** in profit.
+- Home Office recorded the highest segment profit margin at **14.02%**, followed by Corporate at **13.17%** and Consumer at **11.65%**.
 
-**Key Findings**
-
-- The **Consumer** segment generated the highest total sales at **$1,170,659.79** and the highest total profit at **$136,371.45**.
-- The **Corporate** segment generated **$715,806.13** in sales and **$94,249.64** in profit.
-- The **Home Office** segment generated **$440,068.43** in sales and **$61,675.73** in profit.
-- Home Office had the highest profit margin at **14.02%**, followed by Corporate at **13.17%** and Consumer at **11.65%**.
-
-**Business Implication**
-
-The Consumer segment is the largest contributor to overall sales and profit, while Home Office achieves the highest profit margin. Further analysis of product mix, order size, and discount levels could help explain these differences and identify opportunities to improve profitability across customer segments.
-
-### 8. Customer Segment and Discount Analysis
-
-Analyzed profitability across Consumer, Corporate, and Home Office segments at different discount levels.
-
-**Key Findings**
-
-- All three customer segments generated positive total profit at a 0% discount.
-- Consumer recorded the highest profit at a 0% discount, totaling $160,094.93.
-- Home Office achieved the highest profit margin at a 0% discount, at 31.07%.
-- At a 30% discount, all three segments recorded negative total profit.
-- Higher discount levels were generally associated with lower profit margins and losses across the customer segments.
-
-**Business Implication**
-
-Review discount policies across customer segments, particularly for discounts of 30% or higher. Before changing pricing strategies, investigate product mix, order size, and transaction volume to understand the factors associated with lower profitability. These findings indicate an association rather than proof of causation.
+**Business implication:** Consumer is the largest contributor to sales and profit, while Home Office has the highest profit margin. Investigating product mix, order size, and discounts could help explain these differences.
 
 ### 9. Customer-Level Profitability Analysis
 
-Evaluated customer-level sales, profit, order counts, and profit margins to identify high-performing customers and customers associated with losses.
+Analyzed customer-level sales, profit, order counts, and margins to identify customers associated with positive and negative profitability.
 
-**Key Findings**
+**Key findings:**
+- The analysis covered **804 distinct customers**.
+- 645 customers generated positive total profit, while 159 generated negative total profit.
+- Tamara Chand was the most profitable customer, generating **$8,981.32** in profit across five distinct orders.
+- Cindy Stewart recorded the largest customer-level loss at **$6,626.39** across six distinct orders.
 
-- Analyzed 804 customer records.
-- 645 customers generated positive total profit, while 159 had negative total profit.
-- Tamara Chand was the most profitable customer, generating $8,981.32 in total profit across 5 distinct orders.
-- Cindy Stewart recorded the largest customer-level loss, totaling $6,626.39 across 6 distinct orders.
-- The customer-level results represented $2,326,534.52 in sales and $292,296.97 in profit.
+**Business implication:** Investigate the products, discounts, and transactions associated with substantial customer-level losses before considering changes to customer relationships or sales strategies.
 
-**Business Implication**
-
-Identify the products, discounts, and transactions associated with customers generating substantial losses. Use these findings to investigate opportunities to improve transaction profitability while maintaining customer relationships. Customer-level losses should be investigated before making decisions about individual customers.
+*Note: Customer-level totals calculated by summing individually rounded customer figures can differ slightly from the validated overall dataset totals. Overall sales and profit are therefore reported using the raw aggregate values.*
 
 ### 10. Monthly Sales and Profit Trends
 
-Analyzed monthly sales, total profit, and profit margins using the corrected order dates in the staging table.
+Analyzed monthly sales, total profit, and profit margins using the parsed order dates.
 
-**Key Findings**
+**Key findings:**
+- Monthly sales and profitability varied throughout the analyzed period.
+- November 2026 recorded the highest monthly sales in the dataset at **$118,454.51**.
+- December 2025 recorded the highest monthly profit at **$17,926.30**.
+- October 2025 recorded the highest monthly profit margin at **27.17%**.
+- January 2024 recorded a negative profit of **$3,189.80** and a profit margin of **-17.28%**.
 
-- Monthly sales and profitability varied across the analyzed period.
-- November 2026 recorded the highest monthly sales in the dataset at $118,454.51.
-- December 2025 recorded the highest monthly profit at $17,926.30.
-- October 2025 achieved the highest monthly profit margin at 27.17%.
-- January 2024 recorded a negative profit of $3,189.80 and a profit margin of -17.28%.
+**Business implication:** Evaluate sales, profit, and profit margins together to distinguish revenue growth from sustainable profitability. Investigate unusually profitable or loss-making months for differences in product mix, discounts, and transaction characteristics.
 
-**Data Quality Note**
+**Data limitation:** Monthly results include future-dated source records beyond October 19, 2026. Findings for those periods require additional validation before being interpreted as historical performance.
 
-The dataset contains records dated after October 17, 2026, including records for November and December 2026. These figures are retained in the analysis but should be treated as future-dated source records until their validity and intended date range are verified. The monthly results may therefore require further validation before being interpreted as completed historical performance.
+## Tableau Visualizations
 
-**Business Implication**
+The project includes the following Tableau visualizations:
 
-Monitoring sales, profit, and profit margins together provides a more complete view of business performance than sales alone. Further investigation of unusually profitable or loss-making months can help identify patterns in product mix, discounting, and transaction profitability.
+1. **Monthly Sales Trend (2023–2026)** — Tracks monthly sales over time.
+2. **Total Sales by Product Category** — Compares sales across the three major product categories.
+3. **Sales by State and Province** — Uses geographic shading to compare sales across mapped locations.
+4. **Profit by Sub-Category** — Compares sub-category profitability, with orange highlighting negative-profit sub-categories and blue highlighting profitable ones.
 
+The visualizations use currency formatting, descriptive titles, and labels or tooltips to make the results easier to interpret.
 
+## Recommendations for Further Investigation
 
+Based on the current analysis:
 
+- Investigate Tables, Bookcases, and Supplies to understand the drivers of negative profitability.
+- Review transactions with high discounts, especially those associated with substantial losses.
+- Examine Central region performance to identify potential differences in product mix, pricing, and costs.
+- Compare product mix and profitability in high-sales geographic markets.
+- Investigate the factors associated with differences in customer segment margins.
+- Validate the intended reporting period for future-dated records before using monthly results for historical comparisons.
 
-## Next Steps
+These are analytical recommendations for further investigation, not claims of proven causation.
 
-These findings will be investigated further as the analysis progresses. Additional SQL queries, data visualizations, and business recommendations will be added as the project develops.
+## Project Structure
+
+```text
+DataAnalyticsPortfolio/
+└── projects/
+    └── retail-sales-analysis/
+        ├── data/
+        │   ├── orders.csv
+        │   ├── orders_tableau.csv
+        │   └── sample_-_superstore.xls
+        ├── python/
+        │   └── clean_sales_data.py
+        ├── sql/
+        │   ├── 01_create_database.sql
+        │   ├── ...
+        │   └── 19_final_data_validation.sql
+        └── README.md
+```
+
+The Tableau workbook and dashboard preview can be added to a dedicated `tableau/` or `visualizations/` folder when the final project files are organized.
 
 ## Project Status
 
-**In Progress** — Additional SQL analysis, data visualization, and business recommendations are planned.
+**In Progress** — SQL analysis and core Tableau visualizations have been developed. Final dashboard presentation, documentation, repository organization, and publication are the remaining project tasks.
+
+## Author
+
+Eiron T. Batac
+
+Bachelor of Science in Computer Science

@@ -7,3 +7,8 @@
 
 # SQLTools local session files
 *.session.sql
+
+# Tableau temporary and backup files
+~*.twb
+~*.twbx
+*.twbr
