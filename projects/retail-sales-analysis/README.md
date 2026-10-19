@@ -6,6 +6,38 @@ This project analyzes the Sample Superstore retail dataset using MySQL, SQL, Pyt
 
 The objective is to transform raw retail transaction data into actionable business insights through structured SQL analysis and interactive data visualizations.
 
+## Tableau Dashboard Preview
+
+The dashboard presents an overview of retail sales performance, including monthly sales trends, product category performance, geographic sales distribution, and profitability by product sub-category.
+
+![Retail Sales Performance Dashboard](images/dashboard-preview.png)
+
+## Visualizations
+
+### 1. Monthly Sales Trend
+
+Displays monthly sales performance from 2023 to 2026, highlighting changes and peaks across the analyzed period.
+
+![Monthly Sales Trend](images/monthly-sales-trend.png)
+
+### 2. Sales by Product Category
+
+Compares total sales across Technology, Furniture, and Office Supplies.
+
+![Sales by Product Category](images/sales-by-category.png)
+
+### 3. Sales by State and Province
+
+Visualizes the geographic distribution of sales across the states and provinces represented in the dataset.
+
+![Sales by State and Province](images/Sales-by-State-and-Province.png)
+
+### 4. Profit by Sub-Category
+
+Compares profitability across product sub-categories, distinguishing profitable categories from those that recorded losses.
+
+![Profit by Sub-Category](images/profit-by-subcategory.png)
+
 ## Business Objectives
 
 - Evaluate overall sales and profit performance.
@@ -215,26 +247,39 @@ These are analytical recommendations for further investigation, not claims of pr
 
 ```text
 DataAnalyticsPortfolio/
-└── projects/
-    └── retail-sales-analysis/
-        ├── data/
-        │   ├── orders.csv
-        │   ├── orders_tableau.csv
-        │   └── sample_-_superstore.xls
-        ├── python/
-        │   └── clean_sales_data.py
-        ├── sql/
-        │   ├── 01_create_database.sql
-        │   ├── ...
-        │   └── 19_final_data_validation.sql
-        └── README.md
+├── assets/
+├── docs/
+├── projects/
+│   └── retail-sales-analysis/
+│       ├── data/
+│       │   ├── orders.csv
+│       │   ├── orders_tableau.csv
+│       │   └── sample_-_superstore.xls
+│       ├── images/
+│       │   ├── dashboard-preview.png
+│       │   ├── monthly-sales-trend.png
+│       │   ├── profit-by-subcategory.png
+│       │   ├── sales-by-category.png
+│       │   └── Sales-by-State-and-Province.png
+│       ├── python/
+│       │   └── clean_sales_data.py
+│       ├── sql/
+│       │   ├── 01_create_database.sql
+│       │   ├── ...
+│       │   └── 19_final_data_validation.sql
+│       ├── tableau/
+│       │   └── Retail_Sales_Performance_Analysis.twbx
+│       └── README.md
+├── .gitignore
+└── README.md
 ```
 
-The Tableau workbook and dashboard preview can be added to a dedicated `tableau/` or `visualizations/` folder when the final project files are organized.
+**Note:** The SQL directory contains the project's SQL scripts, with filenames abbreviated here for readability.
+
 
 ## Project Status
 
-**In Progress** — SQL analysis and core Tableau visualizations have been developed. Final dashboard presentation, documentation, repository organization, and publication are the remaining project tasks.
+**Core analysis and visualizations completed; final review in progress.** SQL analysis, data validation, and four Tableau worksheets have been developed. The Tableau dashboard, project screenshots, and documentation are being finalized before the repository is published as a completed portfolio project.
 
 ## Author
 
