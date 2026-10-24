@@ -12,7 +12,7 @@ The goal is to translate data-driven findings into actionable recommendations th
 - Analyze churn patterns across contract types, tenure, and payment methods.
 - Examine the relationship between monthly charges, subscribed services, and customer churn.
 - Identify customer segments with higher observed churn rates.
-- Develop evidence-based recommendations to support customer retention strategies.
+- Develop evidence-based recommendations to support customer retention.
 - Communicate key findings through a Tableau dashboard.
 
 ## Tools & Technologies
@@ -43,36 +43,67 @@ The dataset was inspected for data quality issues, including duplicate records a
 3. **Exploratory data analysis:** Investigated churn distributions and customer characteristics.
 4. **Churn rate analysis:** Calculated overall and segment-level churn rates.
 5. **Visualization:** Created charts to compare churn patterns across customer groups.
-6. **Dashboard development:** Built a Tableau Public dashboard to communicate key metrics and findings.
+6. **Dashboard development:** Developed a Tableau dashboard to communicate key metrics and findings.
 7. **Business interpretation:** Developed preliminary recommendations based on the observed patterns.
 
-## Key Findings
+## Python Analysis and Key Findings
 
-The exploratory analysis identified several customer segments with notably different churn rates.
+The Python exploratory data analysis included customer-level data checks, overall churn calculations, and comparisons across customer segments.
 
-1. **Contract Type:** Month-to-month customers had a churn rate of **42.71%**, compared with **11.27%** for one-year contracts and **2.83%** for two-year contracts.
+### Overall Churn
 
-2. **Customer Tenure:** Customers with 0–12 months of tenure had the highest observed churn rate at **47.44%**. The rate declined to **9.51%** among customers with 49–72 months of tenure.
+Of the 7,043 customers in the dataset, **1,869 churned**, while **5,174 remained**.
 
-3. **Payment Method:** Electronic check users had the highest churn rate at **45.29%**, exceeding the rates for other payment methods.
+- **Overall churn rate:** 26.54%
+- **Customers who churned:** 1,869 (26.54%)
+- **Customers who remained:** 5,174 (73.46%)
 
-4. **Internet Service:** Fiber optic customers had a churn rate of **41.89%**, compared with **18.96%** for DSL customers and **7.40%** for customers without internet service.
+### Segment-Level Findings
 
-5. **Additional Services:** Customers without online security and tech support had churn rates of **41.77%** and **41.64%**, respectively. Customers subscribed to these services had considerably lower observed churn rates.
+**1. Contract Type**
 
-6. **Monthly Charges:** Customers who churned had higher average monthly charges (**74.44**) than customers who stayed (**61.27**). Churn rates also varied by monthly charge group, reaching **37.82%** for customers paying 70–100 per month.
+Month-to-month customers had the highest observed churn rate at **42.71%**, compared with **11.27%** for one-year contracts and **2.83%** for two-year contracts. Churn rates were substantially lower among customers with longer-term contracts.
 
-7. **Customer Demographics:** Senior citizens had a churn rate of **41.68%**, compared with **23.61%** for non-senior customers. Customers without partners had a churn rate of **32.96%**, compared with **19.66%** for customers with partners. Churn rates by gender were relatively similar.
+**2. Customer Tenure**
+
+Customers with **0–12 months** of tenure had the highest observed churn rate at **47.44%**. The rate declined across the tenure groups, reaching **9.51%** among customers with **49–72 months** of tenure. This pattern highlights the first year of service as an important period for further retention analysis.
+
+**3. Payment Method**
+
+Customers using electronic checks had the highest observed churn rate at **45.29%**. The rates were lower for mailed checks (**19.11%**), automatic bank transfers (**16.71%**), and automatic credit card payments (**15.24%**). Further analysis would be needed to determine why these differences exist.
+
+**4. Internet Service**
+
+Fiber optic customers had an observed churn rate of **41.89%**, compared with **18.96%** for DSL customers and **7.40%** for customers without internet service. These differences warrant further investigation into pricing, service quality, customer expectations, and other potentially relevant factors.
+
+**5. Additional Services**
+
+Customers without online security had a churn rate of **41.77%**, compared with **14.61%** among customers subscribed to the service. Similarly, customers without tech support had a churn rate of **41.64%**, compared with **15.17%** among customers with tech support. These associations suggest that service subscriptions are useful factors to investigate in customer retention analysis, but they do not establish that the services themselves prevent churn.
+
+**6. Monthly Charges**
+
+Customers who churned had higher average monthly charges (**74.44**) than customers who remained (**61.27**). Churn rates also differed across monthly charge groups:
+
+- **0–35:** 10.89%
+- **35–70:** 23.94%
+- **70–100:** 37.82%
+- **Above 100:** 28.05%
+
+The 70–100 group had the highest observed churn rate among these charge groups. The pattern is not strictly increasing, so monthly charges should be examined alongside contract types and subscribed services rather than treated as an independent explanation for churn.
+
+**7. Customer Demographics**
+
+Senior citizens had an observed churn rate of **41.68%**, compared with **23.61%** for non-senior customers. Customers without partners had a rate of **32.96%**, compared with **19.66%** for customers with partners. Customers without dependents had a rate of **31.28%**, compared with **15.45%** for customers with dependents. Churn rates by gender were relatively similar: **26.92%** for female customers and **26.16%** for male customers.
 
 These findings describe associations in the dataset and do not establish that any particular factor directly causes customer churn. Rates for specific demographic combinations should also be interpreted in the context of the number of customers in each subgroup.
 
 ## Tableau Dashboard
 
-The Tableau Public dashboard brings together the main churn metrics and segment-level comparisons.
+The Tableau dashboard brings together key churn metrics and segment-level comparisons.
 
 ![Customer Churn Analysis Dashboard](images/customer-churn-dashboard.png)
 
-The dashboard is available in the packaged Tableau workbook, `tableau/customer_churn_analysis.twbx`. The workbook contains the dashboard and supporting worksheets used to explore customer churn patterns.
+The packaged Tableau workbook is available at `tableau/customer_churn_analysis.twbx`. It contains the dashboard and supporting worksheets used to explore customer churn patterns.
 
 ### Supporting Visualizations
 
@@ -108,7 +139,7 @@ Based on the exploratory findings, the following actions could be investigated:
 - **Review contract strategies:** Investigate why month-to-month customers churn more frequently and evaluate appropriate longer-term contract incentives.
 - **Investigate fiber optic churn:** Examine customer feedback, service quality, pricing, and expectations among fiber optic subscribers.
 - **Review payment experiences:** Investigate whether electronic check users encounter payment-related friction and evaluate convenient alternative payment options.
-- **Promote service value:** Assess the perceived value and accessibility of online security and technical support services.
+- **Evaluate additional services:** Assess the perceived value and accessibility of online security and technical support services.
 - **Investigate pricing and service combinations:** Explore how monthly charges, contract types, and subscribed services interact with churn behavior.
 
 These recommendations should be evaluated using additional analysis and customer feedback before implementation.
@@ -120,33 +151,30 @@ customer-churn-analysis/
 ├── data/
 │   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
 ├── images/
-│   ├── customer-churn-dashboard.png
 │   ├── churn-by-contract.png
-│   ├── churn-by-tenure.png
-│   ├── churn-by-payment-method.png
+│   ├── churn-by-demographics.png
 │   ├── churn-by-internet-service.png
 │   ├── churn-by-monthly-charges.png
-│   └── churn-by-demographics.png
+│   ├── churn-by-payment-method.png
+│   ├── churn-by-tenure.png
+│   └── customer-churn-dashboard.png
 ├── python/
 │   ├── charts/
+│   │   ├── churn_heatmap_contract_internet.png
+│   │   ├── churn_rate_by_contract.png
+│   │   ├── churn_rate_by_demographics.png
+│   │   ├── churn_rate_by_internet.png
+│   │   ├── churn_rate_by_monthly_charge.png
+│   │   ├── churn_rate_by_payment.png
+│   │   ├── churn_rate_by_tenure.png
+│   │   └── churn_rate_security_tech_support.png
 │   └── analyze_churn.ipynb
 ├── tableau/
+│   └── customer_churn_analysis.twbx
 └── README.md
 ```
 
-The `data/` directory contains the dataset, `images/` contains screenshots for the README, `python/` contains the Jupyter notebook and exported analytical charts, and `tableau/` is reserved for Tableau project files.
-
-## Project Status
-
-**Status: Analysis and dashboard completed**
-
-- Dataset acquired and inspected.
-- Data quality checks and exploratory analysis completed in Python.
-- Customer churn rates calculated across multiple customer segments.
-- Python visualizations generated and saved.
-- Tableau dashboard and supporting worksheets completed.
-- Key findings and preliminary business recommendations documented.
-- README documentation updated with dashboard and visualization screenshots.
+The `data/` directory contains the original dataset. The `images/` directory contains the images used in this README. The `python/` directory contains the Jupyter notebook and exported analytical charts in `python/charts/`. The `tableau/` directory contains the packaged Tableau workbook.
 
 ## Future Improvements
 
@@ -155,3 +183,7 @@ The `data/` directory contains the dataset, `images/` contains screenshots for t
 - Validate observed patterns using additional statistical analysis.
 - Refine business recommendations based on further analysis and customer feedback.
 - Explore predictive modeling to identify customers at elevated risk of churn.
+
+**## Author**
+Eiron T. Batac
+Bachelor of Science in Computer Science
